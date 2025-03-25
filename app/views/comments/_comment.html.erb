@@ -1,0 +1,4 @@
+<%= turbo_frame_tag dom_id(comment) do %>
+  <p><%= comment.body %></p>
+  <%= button_to "Delete", comment, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } %>
+<% end %>
