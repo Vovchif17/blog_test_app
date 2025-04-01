@@ -1,11 +1,13 @@
 class CommentsController < ApplicationController
+  before_action :set_post
+
   def create
-    @post = Post.find(params[:post_id])
+    post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
 
     if @comment.save
       respond_to do |format|
-        format.html { redirect_to @post, notice: "Comment added!" }
+        format.html { redirect_to post, notice: "Comment added!" }
         format.turbo_stream
       end
     else
@@ -14,7 +16,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
     @comment.destroy
 
     respond_to do |format|
@@ -24,6 +25,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
 
   def comment_params
     params.require(:comment).permit(:body)
