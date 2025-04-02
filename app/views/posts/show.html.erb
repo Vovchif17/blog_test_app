@@ -1,0 +1,23 @@
+<%= turbo_frame_tag "post_#{@post.id}" do %>
+  <h1><%= @post.title %></h1>
+  <p><%= @post.body %></p>
+<% end %>
+
+<%= link_to 'Back', posts_path %> | <%= link_to 'Edit', edit_post_path(@post) %> | <%= button_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<h2>Comments</h2>
+<ul>
+  <% @comments.each do |comment| %>
+    <li><%= comment.body %></li>
+  <% end %>
+</ul>
+
+<h3>Add a comment:</h3>
+<%= form_with model: [@post, @comment], local: true do |form| %>
+  <p>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit "Add Comment" %>
+  </p>
+<% end %>

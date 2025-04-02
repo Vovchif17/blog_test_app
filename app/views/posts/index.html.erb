@@ -1,0 +1,11 @@
+<h1>Posts</h1>
+
+<%= turbo_frame_tag "new_post" do %>
+ <% if @posts.present? %>
+    <%= render @posts %> 
+  <% else %>
+    <p>No posts available.</p>
+  <% end %>
+<% end %>
+
+<%= link_to "New Post", new_post_path, data: { turbo_frame: "new_post" } %>
