@@ -24,6 +24,8 @@
   </head>
 
   <body>
-    <%= yield %>
+  <%= turbo_stream_from "navbar_#{session[:user_id]}" %>
+  <%= render 'shared/navbar' %>
+  <%= yield %>
   </body>
 </html>
