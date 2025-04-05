@@ -1,0 +1,8 @@
+<nav class="navbar">
+  <% if session[:user_id] %>
+    <p>Hello, <%= User.find(session[:user_id]).email_address %>!</p>
+    <%= button_to "Log uot", session_path, method: :delete, data: { turbo_frame: "_top" }, class: "btn btn-danger" %>
+  <% else %>
+    <%= link_to "Log in", new_session_path, class: "btn btn-primary" %>
+  <% end %>
+</nav>
